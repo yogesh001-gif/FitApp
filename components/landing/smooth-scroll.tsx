@@ -12,17 +12,20 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5, // reduced from 2 — prevents over-scroll on mobile sticky sections
     });
+
+    let rafId: number;
 
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId); // properly clean up RAF on unmount
       lenis.destroy();
     };
   }, []);

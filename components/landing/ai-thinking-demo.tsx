@@ -39,31 +39,31 @@ export function AiThinkingDemo() {
   }, [isInView]);
 
   return (
-    <section className="py-24 bg-slate-950">
+    <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
       <div className="mx-auto max-w-4xl px-6 lg:px-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">Real AI. Not just wrappers.</h2>
-          <p className="text-lg text-slate-400">See how FITAPP processes your context to build your custom path.</p>
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Real AI. Not just wrappers.</h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400">See how FITMITRA processes your context to build your custom path.</p>
         </div>
 
-        <div ref={containerRef} className="rounded-2xl border border-white/10 bg-slate-900/50 p-4 md:p-8 shadow-2xl backdrop-blur max-w-3xl mx-auto">
+        <div ref={containerRef} className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/50 p-4 md:p-8 shadow-xl dark:shadow-2xl backdrop-blur max-w-3xl mx-auto transition-colors duration-500">
           
           {/* User Input */}
           <div className="flex gap-4 mb-8">
-            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
-              <User size={18} className="text-slate-400" />
+            <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-200 dark:border-white/5 transition-colors">
+              <User size={18} className="text-slate-500 dark:text-slate-400" />
             </div>
-            <div className="bg-slate-800 text-white p-4 rounded-2xl rounded-tl-sm border border-white/5">
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white p-4 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-white/5 transition-colors">
               I want to gain muscle. I'm 180cm, 75kg. I only have dumbbells.
             </div>
           </div>
 
           {/* AI Response Box */}
           <div className="flex gap-4">
-            <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/30">
-              <Bot size={18} className="text-emerald-400" />
+            <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-500/30 transition-colors">
+              <Bot size={18} className="text-emerald-600 dark:text-emerald-400" />
             </div>
-            <div className="flex-1 bg-slate-950 text-emerald-400 p-4 rounded-2xl rounded-tr-sm border border-emerald-500/20 font-mono text-sm leading-relaxed min-h-[200px]">
+            <div className="flex-1 bg-slate-900 dark:bg-slate-950 text-emerald-400 p-4 rounded-2xl rounded-tr-sm border border-slate-800 dark:border-emerald-500/20 font-mono text-sm leading-relaxed min-h-[200px] shadow-inner transition-colors">
               
               {currentStep === -1 && isInView && (
                 <motion.span 

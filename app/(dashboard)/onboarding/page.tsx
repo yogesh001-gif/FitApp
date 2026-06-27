@@ -51,7 +51,7 @@ export default function OnboardingPage() {
   return (
     <div className="max-w-2xl mx-auto pt-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-display font-semibold text-white mb-2">Welcome to Fitapp</h1>
+        <h1 className="text-3xl font-display font-semibold text-white mb-2">Welcome to FitMitra</h1>
         <p className="text-muted-foreground">Let's set up your profile to generate your custom targets.</p>
         
         <div className="flex gap-2 mt-6">

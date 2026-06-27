@@ -7,7 +7,7 @@ import { StatCard } from '../../../components/dashboard/stat-card';
 import { BentoCard } from '../../../components/dashboard/bento-card';
 import { CircularProgress } from '../../../components/dashboard/circular-progress';
 import { AiDailyBriefing } from '../../../components/dashboard/ai-daily-briefing';
-import { Flame, Droplets, Target, Activity, Dumbbell, Utensils, TrendingUp } from 'lucide-react';
+import { Flame, Droplets, Target, Activity, Dumbbell, Utensils } from 'lucide-react';
 
 export default async function DashboardPage() {
   const { userId } = await auth();
@@ -20,10 +20,10 @@ export default async function DashboardPage() {
       <div className="space-y-6">
         <BentoCard>
           <div className="flex flex-col items-center justify-center text-center p-10">
-            <Activity className="h-12 w-12 text-destructive mb-4" />
-            <h2 className="text-2xl font-display font-semibold text-white mb-2">Fitapp is running in UI-only mode</h2>
-            <p className="text-muted-foreground max-w-md">
-              MongoDB authentication is failing right now. Fix the Atlas credentials in <span className="font-medium text-white px-2 py-1 bg-white/10 rounded">.env.local</span> and reload the server to restore full functionality.
+            <Activity className="h-12 w-12 text-red-500 dark:text-red-400 mb-4" />
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white mb-2">FitMitra is running in UI-only mode</h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-md text-sm">
+              MongoDB authentication is failing right now. Fix the Atlas credentials in <span className="font-medium text-slate-700 dark:text-slate-300 px-2 py-1 bg-slate-100 dark:bg-white/5 rounded-md">.env.local</span> and reload the server to restore full functionality.
             </p>
           </div>
         </BentoCard>
@@ -56,35 +56,30 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <AiDailyBriefing 
-        userName={user.name ?? 'Athlete'} 
-        targets={targets} 
-        dailyTotals={dailyTotals} 
-        weightDelta={weightDelta} 
-      />
+      <AiDailyBriefing />
       
       <div className="grid gap-6 grid-cols-1 md:grid-cols-6 lg:grid-cols-12 auto-rows-[minmax(180px,auto)]">
       
-      {/* Hero Calorie Card - Spans 2 rows and 4 cols on Desktop */}
+      {/* Hero Calorie Card */}
       <div className="md:col-span-6 lg:col-span-5 lg:row-span-2">
-        <BentoCard gradient="primary" delay={0.1} className="h-full flex flex-col justify-center items-center text-center">
-          <div className="mb-6 flex items-center justify-center bg-primary/20 p-4 rounded-full shadow-neon-primary">
-            <Flame className="h-8 w-8 text-primary" />
+        <BentoCard delay={0.1} className="h-full flex flex-col justify-center items-center text-center">
+          <div className="mb-6 flex items-center justify-center bg-emerald-50 dark:bg-white/[0.03] p-4 rounded-2xl border border-emerald-100 dark:border-white/[0.06]">
+            <Flame className="h-6 w-6 text-emerald-500 dark:text-emerald-400" />
           </div>
-          <h2 className="text-lg font-medium text-muted-foreground uppercase tracking-widest mb-6">Daily Calories</h2>
+          <h2 className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-8">Daily Calories</h2>
           
           <CircularProgress 
             value={progress.calories.completion} 
             max={100} 
             size={220} 
-            strokeWidth={14}
-            colorClass="text-primary"
+            strokeWidth={10}
+            colorClass="text-emerald-500 dark:text-emerald-400"
             label={`${Math.round(dailyTotals.calories)}`}
             sublabel={`/ ${targets.calorieTarget} kcal`}
           />
           
-          <p className="mt-8 text-sm text-muted-foreground max-w-[200px]">
-            You have <span className="text-white font-medium">{progress.calories.remaining} kcal</span> remaining today based on your goal.
+          <p className="mt-8 text-sm text-slate-500 max-w-[200px]">
+            <span className="text-slate-900 dark:text-white font-medium">{progress.calories.remaining} kcal</span> remaining today.
           </p>
         </BentoCard>
       </div>
@@ -95,7 +90,7 @@ export default async function DashboardPage() {
           title="Current Weight" 
           value={`${latestWeight.toFixed(1)} kg`} 
           description={`${weightDelta > 0 ? '+' : ''}${weightDelta.toFixed(1)} kg since last log`}
-          icon={<Activity className="h-5 w-5 text-accent" />}
+          icon={<Activity className="h-4 w-4" />}
           delay={0.2}
         />
       </div>
@@ -104,42 +99,62 @@ export default async function DashboardPage() {
         <StatCard 
           title="Daily Goal" 
           value={<span className="capitalize">{String(user.goal).replace(/_/g, ' ')}</span>} 
-          description="Your adaptive targets adjust based on this objective."
-          icon={<Target className="h-5 w-5 text-primary" />}
+          description="Adaptive targets based on goal."
+          icon={<Target className="h-4 w-4" />}
           delay={0.3}
         />
       </div>
 
       <div className="md:col-span-6 lg:col-span-7">
         <BentoCard delay={0.4} className="h-full flex flex-col justify-between">
-          <div className="flex items-center gap-3 mb-6">
-            <Utensils className="h-5 w-5 text-muted-foreground" />
-            <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Macros Breakdown</h3>
+          <div className="flex items-center gap-2 mb-6">
+            <Utensils className="h-4 w-4 text-emerald-500 dark:text-emerald-400" />
+            <h3 className="text-[11px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest">Macros</h3>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-auto">
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Protein</p>
-              <p className="text-2xl font-display font-bold text-white">{Math.round(progress.protein.consumed)}<span className="text-sm font-normal text-muted-foreground ml-1">g</span></p>
-              <div className="w-full bg-white/10 h-1 mt-2 rounded-full"><div className="bg-primary h-full rounded-full" style={{width: `${Math.min((progress.protein.consumed/progress.protein.target)*100, 100)}%`}}></div></div>
+            <div className="flex flex-col">
+              <p className="text-[11px] text-slate-500 uppercase tracking-widest mb-1">Protein</p>
+              <div className="flex items-baseline gap-1">
+                <p className="text-2xl font-light text-slate-900 dark:text-white tracking-tight">{Math.round(progress.protein.consumed)}</p>
+                <span className="text-xs text-slate-500">g</span>
+              </div>
+              <div className="w-full bg-slate-200 dark:bg-slate-800/50 h-1 mt-2 rounded-full overflow-hidden">
+                <div className="bg-emerald-500 dark:bg-emerald-400/80 h-full rounded-full transition-all duration-1000" style={{width: `${Math.min((progress.protein.consumed/progress.protein.target)*100, 100)}%`}}></div>
+              </div>
             </div>
             
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Carbs</p>
-              <p className="text-2xl font-display font-bold text-white">{Math.round(progress.carbohydrates.consumed)}<span className="text-sm font-normal text-muted-foreground ml-1">g</span></p>
-              <div className="w-full bg-white/10 h-1 mt-2 rounded-full"><div className="bg-secondary h-full rounded-full" style={{width: `${Math.min((progress.carbohydrates.consumed/progress.carbohydrates.target)*100, 100)}%`}}></div></div>
+            <div className="flex flex-col">
+              <p className="text-[11px] text-slate-500 uppercase tracking-widest mb-1">Carbs</p>
+              <div className="flex items-baseline gap-1">
+                <p className="text-2xl font-light text-slate-900 dark:text-white tracking-tight">{Math.round(progress.carbohydrates.consumed)}</p>
+                <span className="text-xs text-slate-500">g</span>
+              </div>
+              <div className="w-full bg-slate-200 dark:bg-slate-800/50 h-1 mt-2 rounded-full overflow-hidden">
+                <div className="bg-blue-500 dark:bg-blue-400/80 h-full rounded-full transition-all duration-1000" style={{width: `${Math.min((progress.carbohydrates.consumed/progress.carbohydrates.target)*100, 100)}%`}}></div>
+              </div>
             </div>
             
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Fat</p>
-              <p className="text-2xl font-display font-bold text-white">{Math.round(progress.fat.consumed)}<span className="text-sm font-normal text-muted-foreground ml-1">g</span></p>
-              <div className="w-full bg-white/10 h-1 mt-2 rounded-full"><div className="bg-accent h-full rounded-full" style={{width: `${Math.min((progress.fat.consumed/progress.fat.target)*100, 100)}%`}}></div></div>
+            <div className="flex flex-col">
+              <p className="text-[11px] text-slate-500 uppercase tracking-widest mb-1">Fat</p>
+              <div className="flex items-baseline gap-1">
+                <p className="text-2xl font-light text-slate-900 dark:text-white tracking-tight">{Math.round(progress.fat.consumed)}</p>
+                <span className="text-xs text-slate-500">g</span>
+              </div>
+              <div className="w-full bg-slate-200 dark:bg-slate-800/50 h-1 mt-2 rounded-full overflow-hidden">
+                <div className="bg-amber-500 dark:bg-amber-400/80 h-full rounded-full transition-all duration-1000" style={{width: `${Math.min((progress.fat.consumed/progress.fat.target)*100, 100)}%`}}></div>
+              </div>
             </div>
             
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/5">
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Fiber</p>
-              <p className="text-2xl font-display font-bold text-white">{Math.round(progress.fiber.consumed)}<span className="text-sm font-normal text-muted-foreground ml-1">g</span></p>
-              <div className="w-full bg-white/10 h-1 mt-2 rounded-full"><div className="bg-muted-foreground h-full rounded-full" style={{width: `${Math.min((progress.fiber.consumed/progress.fiber.target)*100, 100)}%`}}></div></div>
+            <div className="flex flex-col">
+              <p className="text-[11px] text-slate-500 uppercase tracking-widest mb-1">Fiber</p>
+              <div className="flex items-baseline gap-1">
+                <p className="text-2xl font-light text-slate-900 dark:text-white tracking-tight">{Math.round(progress.fiber.consumed)}</p>
+                <span className="text-xs text-slate-500">g</span>
+              </div>
+              <div className="w-full bg-slate-200 dark:bg-slate-800/50 h-1 mt-2 rounded-full overflow-hidden">
+                <div className="bg-slate-500 dark:bg-slate-400/80 h-full rounded-full transition-all duration-1000" style={{width: `${Math.min((progress.fiber.consumed/progress.fiber.target)*100, 100)}%`}}></div>
+              </div>
             </div>
           </div>
         </BentoCard>
@@ -147,19 +162,19 @@ export default async function DashboardPage() {
 
       {/* Water Tracking Card */}
       <div className="md:col-span-3 lg:col-span-4">
-        <BentoCard gradient="secondary" delay={0.5} className="h-full flex flex-col items-center justify-center text-center">
+        <BentoCard delay={0.5} className="h-full flex flex-col items-center justify-center text-center">
           <div className="flex items-center gap-2 mb-4">
-            <Droplets className="h-5 w-5 text-secondary" />
-            <h3 className="text-sm font-medium text-secondary uppercase tracking-wider">Hydration</h3>
+            <Droplets className="h-4 w-4 text-blue-500 dark:text-blue-400" />
+            <h3 className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Hydration</h3>
           </div>
-          <div className="flex items-baseline gap-1 mt-2 mb-4">
-            <span className="text-5xl font-display font-bold text-white tracking-tighter">{waterTotal}</span>
-            <span className="text-lg text-muted-foreground">/ {user.waterGoalOz ?? 100} oz</span>
+          <div className="flex items-baseline gap-1 mt-2 mb-6">
+            <span className="text-4xl font-semibold text-slate-900 dark:text-white tracking-tighter">{waterTotal}</span>
+            <span className="text-sm text-slate-500">/ {user.waterGoalOz ?? 100} oz</span>
           </div>
           <div className="w-full px-6">
-            <div className="w-full bg-black/40 h-2 mt-2 rounded-full overflow-hidden border border-white/5">
+            <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
               <div 
-                className="bg-secondary h-full rounded-full transition-all duration-1000" 
+                className="bg-blue-500 dark:bg-blue-400 h-full rounded-full transition-all duration-1000" 
                 style={{width: `${Math.min((waterTotal/(user.waterGoalOz ?? 100))*100, 100)}%`}}
               ></div>
             </div>
@@ -171,22 +186,22 @@ export default async function DashboardPage() {
       <div className="md:col-span-3 lg:col-span-4 lg:col-start-9 lg:row-start-2 lg:row-span-2">
         <BentoCard delay={0.6} className="h-full flex flex-col">
           <div className="flex items-center gap-3 mb-6">
-            <Dumbbell className="h-5 w-5 text-muted-foreground" />
-            <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Metrics</h3>
+            <Dumbbell className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+            <h3 className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Metrics</h3>
           </div>
           
           <div className="space-y-4 mt-auto">
-            <div className="flex justify-between items-center py-3 border-b border-white/5">
-              <span className="text-sm text-muted-foreground">BMI</span>
-              <span className="text-lg font-medium text-white">{targets.bmi}</span>
+            <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-white/[0.04]">
+              <span className="text-sm text-slate-500 dark:text-slate-400">BMI</span>
+              <span className="text-sm font-medium text-slate-900 dark:text-white">{targets.bmi}</span>
             </div>
-            <div className="flex justify-between items-center py-3 border-b border-white/5">
-              <span className="text-sm text-muted-foreground">BMR</span>
-              <span className="text-lg font-medium text-white">{targets.bmr}</span>
+            <div className="flex justify-between items-center py-3 border-b border-slate-200 dark:border-white/[0.04]">
+              <span className="text-sm text-slate-500 dark:text-slate-400">BMR</span>
+              <span className="text-sm font-medium text-slate-900 dark:text-white">{targets.bmr}</span>
             </div>
             <div className="flex justify-between items-center py-3">
-              <span className="text-sm text-muted-foreground">TDEE</span>
-              <span className="text-lg font-medium text-white">{targets.tdee}</span>
+              <span className="text-sm text-slate-500 dark:text-slate-400">TDEE</span>
+              <span className="text-sm font-medium text-slate-900 dark:text-white">{targets.tdee}</span>
             </div>
           </div>
         </BentoCard>

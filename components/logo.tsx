@@ -11,12 +11,12 @@ export function Logo({ className = '' }: { className?: string }) {
       <div className="relative w-8 h-8">
         <Image
           src="/logofit.png"
-          alt="Fitapp Logo"
+          alt="FitMitra Logo"
           fill
           className="object-contain"
         />
       </div>
-      <p className="text-sm uppercase tracking-[0.35em] text-white font-semibold">Fitapp</p>
+      <p className="text-sm uppercase tracking-[0.35em] text-slate-900 dark:text-white font-semibold">FitMitra</p>
     </Link>
   );
 }

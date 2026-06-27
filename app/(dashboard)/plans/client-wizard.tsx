@@ -51,10 +51,10 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8 px-4">
-        <h1 className="text-2xl font-display font-semibold text-white">Plan Generator</h1>
-        <div className="flex gap-2">
+        <h1 className="text-xl font-semibold text-white tracking-tight">Plan Generator</h1>
+        <div className="flex gap-1.5">
           {[1, 2, 3].map(i => (
-            <div key={i} className={`h-2 w-12 rounded-full ${step >= i ? 'bg-primary' : 'bg-white/10'}`} />
+            <div key={i} className={`h-1.5 w-10 rounded-full transition-colors ${step >= i ? 'bg-white' : 'bg-white/10'}`} />
           ))}
         </div>
       </div>
@@ -66,8 +66,10 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
             {step === 1 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                 <div className="flex items-center gap-3 mb-6">
-                  <Target className="h-5 w-5 text-primary" />
-                  <h2 className="text-lg font-medium text-white">Select Primary Goal</h2>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/20">
+                    <Target className="h-4 w-4 text-blue-400" />
+                  </div>
+                  <h2 className="text-sm font-semibold text-white">Select Primary Goal</h2>
                 </div>
                 
                 <div className="grid gap-4">
@@ -79,10 +81,10 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
                     <button
                       key={g.id}
                       onClick={() => setGoal(g.id as any)}
-                      className={`text-left p-5 rounded-2xl border transition-all ${goal === g.id ? 'bg-primary/20 border-primary shadow-glow shadow-primary/20' : 'bg-black/20 border-white/5 hover:bg-white/5 hover:border-white/10'}`}
+                      className={`text-left p-5 rounded-xl border transition-all ${goal === g.id ? 'bg-white/[0.04] border-white/[0.15]' : 'bg-black/20 border-white/[0.06] hover:bg-white/[0.02] hover:border-white/[0.1]'}`}
                     >
-                      <p className={`font-semibold ${goal === g.id ? 'text-primary' : 'text-white'}`}>{g.label}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{g.desc}</p>
+                      <p className={`text-sm font-semibold ${goal === g.id ? 'text-white' : 'text-slate-300'}`}>{g.label}</p>
+                      <p className="text-xs text-slate-500 mt-1.5">{g.desc}</p>
                     </button>
                   ))}
                 </div>
@@ -92,19 +94,21 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
             {step === 2 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                 <div className="flex items-center gap-3 mb-6">
-                  <Dumbbell className="h-5 w-5 text-secondary" />
-                  <h2 className="text-lg font-medium text-white">Training Parameters</h2>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                    <Dumbbell className="h-4 w-4 text-emerald-400" />
+                  </div>
+                  <h2 className="text-sm font-semibold text-white">Training Parameters</h2>
                 </div>
                 
                 <div className="space-y-6">
                   <div>
-                    <label className="text-sm text-muted-foreground block mb-3">Experience Level</label>
+                    <label className="text-[10px] uppercase tracking-wider text-slate-500 block mb-3">Experience Level</label>
                     <div className="grid grid-cols-3 gap-3">
                       {['Beginner', 'Intermediate', 'Advanced'].map(lvl => (
                         <button
                           key={lvl}
                           onClick={() => setExperience(lvl)}
-                          className={`p-3 text-sm rounded-xl border transition-all ${experience === lvl ? 'bg-secondary/20 border-secondary text-secondary font-medium' : 'bg-black/20 border-white/5 text-slate-300 hover:bg-white/5'}`}
+                          className={`p-3 text-xs rounded-xl border transition-all ${experience === lvl ? 'bg-white/[0.04] border-white/[0.15] text-white font-medium' : 'bg-black/20 border-white/[0.06] text-slate-400 hover:bg-white/[0.02]'}`}
                         >
                           {lvl}
                         </button>
@@ -113,13 +117,13 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
                   </div>
 
                   <div>
-                    <label className="text-sm text-muted-foreground block mb-3">Available Equipment</label>
+                    <label className="text-[10px] uppercase tracking-wider text-slate-500 block mb-3">Available Equipment</label>
                     <div className="grid grid-cols-2 gap-3">
                       {['Full Gym', 'Dumbbells Only', 'Bodyweight', 'Resistance Bands'].map(eq => (
                         <button
                           key={eq}
                           onClick={() => setEquipment(eq)}
-                          className={`p-3 text-sm rounded-xl border transition-all ${equipment === eq ? 'bg-secondary/20 border-secondary text-secondary font-medium' : 'bg-black/20 border-white/5 text-slate-300 hover:bg-white/5'}`}
+                          className={`p-3 text-xs rounded-xl border transition-all ${equipment === eq ? 'bg-white/[0.04] border-white/[0.15] text-white font-medium' : 'bg-black/20 border-white/[0.06] text-slate-400 hover:bg-white/[0.02]'}`}
                         >
                           {eq}
                         </button>
@@ -133,16 +137,18 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
             {step === 3 && (
               <div className="animate-in fade-in slide-in-from-right-4 duration-500">
                 <div className="flex items-center gap-3 mb-6">
-                  <Apple className="h-5 w-5 text-accent" />
-                  <h2 className="text-lg font-medium text-white">Dietary Preferences</h2>
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 border border-amber-500/20">
+                    <Apple className="h-4 w-4 text-amber-400" />
+                  </div>
+                  <h2 className="text-sm font-semibold text-white">Dietary Preferences</h2>
                 </div>
                 
-                <div className="grid gap-4">
+                <div className="grid gap-3">
                   {['No restrictions', 'Vegetarian', 'Vegan', 'Keto', 'Paleo'].map(diet => (
                     <button
                       key={diet}
                       onClick={() => setDietPref(diet)}
-                      className={`text-left p-4 rounded-xl border transition-all ${dietPref === diet ? 'bg-accent/20 border-accent text-accent font-medium shadow-glow shadow-accent/20' : 'bg-black/20 border-white/5 text-slate-300 hover:bg-white/5'}`}
+                      className={`text-left p-4 rounded-xl border transition-all text-sm ${dietPref === diet ? 'bg-white/[0.04] border-white/[0.15] text-white font-medium' : 'bg-black/20 border-white/[0.06] text-slate-400 hover:bg-white/[0.02]'}`}
                     >
                       {diet}
                     </button>
@@ -153,16 +159,16 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
 
             {step === 4 && (
               <div className="flex flex-col items-center justify-center text-center h-full animate-in zoom-in-95 duration-500 py-12">
-                <div className="h-20 w-20 bg-primary/20 rounded-full flex items-center justify-center mb-6 shadow-glow border border-primary/30">
-                  <CheckCircle2 className="h-10 w-10 text-primary" />
+                <div className="h-16 w-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                  <CheckCircle2 className="h-8 w-8 text-emerald-400" />
                 </div>
-                <h2 className="text-2xl font-display font-semibold text-white mb-2">Plans Generated!</h2>
-                <p className="text-muted-foreground max-w-sm mb-8">
+                <h2 className="text-lg font-semibold text-white mb-2">Plans Generated!</h2>
+                <p className="text-xs text-slate-500 max-w-[250px] mb-8 leading-relaxed">
                   Your custom AI workout and diet plans have been saved to your dashboard.
                 </p>
                 <button 
                   onClick={() => window.location.href = '/dashboard'}
-                  className="bg-white text-black px-6 py-3 rounded-xl font-medium hover:bg-slate-200 transition-colors"
+                  className="bg-white text-black px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors"
                 >
                   Go to Dashboard
                 </button>
@@ -174,7 +180,7 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
                 <button 
                   onClick={() => setStep(step - 1 as WizardStep)}
                   disabled={step === 1 || isGenerating}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-white transition-colors disabled:opacity-0"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium text-slate-500 hover:text-white transition-colors disabled:opacity-0"
                 >
                   <ChevronLeft className="h-4 w-4" /> Back
                 </button>
@@ -182,7 +188,7 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
                 {step < 3 ? (
                   <button 
                     onClick={() => setStep(step + 1 as WizardStep)}
-                    className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors"
+                    className="flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-lg text-xs font-medium hover:bg-slate-200 transition-colors"
                   >
                     Next <ChevronRight className="h-4 w-4" />
                   </button>
@@ -190,9 +196,9 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
                   <button 
                     onClick={generatePlan}
                     disabled={isGenerating}
-                    className="flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-lg text-xs font-medium hover:bg-slate-200 transition-colors disabled:opacity-50"
                   >
-                    {isGenerating ? <><Loader2 className="h-4 w-4 animate-spin" /> Generating...</> : <><Settings className="h-4 w-4" /> Generate Plans</>}
+                    {isGenerating ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Generating...</> : <><Settings className="h-3.5 w-3.5" /> Generate</>}
                   </button>
                 )}
               </div>
@@ -202,46 +208,43 @@ export function PlansWizard({ initialProfile }: { initialProfile: any }) {
 
         {/* Live Preview Panel */}
         <div className="lg:col-span-1">
-          <BentoCard className="h-full bg-card/40 border-dashed relative overflow-hidden">
-            {/* Ambient Background Glow based on goal */}
-            <div className={`absolute -top-20 -right-20 w-40 h-40 blur-[80px] rounded-full opacity-30 pointer-events-none transition-colors duration-1000 ${goal === 'weight_loss' ? 'bg-secondary' : goal === 'muscle_gain' ? 'bg-primary' : 'bg-accent'}`} />
-            
-            <div className="flex items-center gap-2 mb-6">
-              <Activity className="h-4 w-4 text-muted-foreground" />
-              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Live Preview</h3>
+          <BentoCard className="h-full bg-slate-900/20 border-dashed relative overflow-hidden">
+            <div className="flex items-center gap-2 mb-8">
+              <Activity className="h-4 w-4 text-slate-500" />
+              <h3 className="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Live Preview</h3>
             </div>
 
-            <div className="space-y-6 relative z-10">
+            <div className="space-y-8 relative z-10">
               <div>
-                <p className="text-xs text-muted-foreground mb-1">Target Calories</p>
-                <p className="text-3xl font-display font-bold text-white tracking-tight">{previewTargets.calorieTarget} <span className="text-sm text-muted-foreground font-normal">kcal</span></p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Target Calories</p>
+                <p className="text-3xl font-semibold text-white tracking-tight">{previewTargets.calorieTarget} <span className="text-xs text-slate-500 font-normal">kcal</span></p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                  <p className="text-[10px] text-muted-foreground uppercase mb-1">Protein</p>
-                  <p className="text-lg font-semibold text-white">{previewTargets.proteinTarget}g</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white/[0.02] p-3 rounded-xl border border-white/[0.04]">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Protein</p>
+                  <p className="text-sm font-semibold text-white">{previewTargets.proteinTarget}g</p>
                 </div>
-                <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                  <p className="text-[10px] text-muted-foreground uppercase mb-1">Carbs</p>
-                  <p className="text-lg font-semibold text-white">{previewTargets.carbohydrateTarget}g</p>
+                <div className="bg-white/[0.02] p-3 rounded-xl border border-white/[0.04]">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1.5">Carbs</p>
+                  <p className="text-sm font-semibold text-white">{previewTargets.carbohydrateTarget}g</p>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/5">
-                <p className="text-xs text-muted-foreground mb-3">AI Plan Parameters</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-400">Experience</span>
-                    <span className="text-white font-medium">{experience}</span>
+              <div className="pt-6 border-t border-white/[0.06]">
+                <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-4">AI Plan Parameters</p>
+                <div className="space-y-3">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-500">Experience</span>
+                    <span className="text-slate-300 font-medium">{experience}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-400">Equipment</span>
-                    <span className="text-white font-medium truncate max-w-[120px] text-right">{equipment}</span>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-500">Equipment</span>
+                    <span className="text-slate-300 font-medium truncate max-w-[120px] text-right">{equipment}</span>
                   </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-400">Diet</span>
-                    <span className="text-white font-medium">{dietPref}</span>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-500">Diet</span>
+                    <span className="text-slate-300 font-medium">{dietPref}</span>
                   </div>
                 </div>
               </div>

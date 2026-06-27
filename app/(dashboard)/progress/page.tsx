@@ -130,7 +130,6 @@ export default function ProgressPage() {
     setIsAnalyzing(true);
     setAiAnalysis(null);
 
-    // Grab oldest and newest photo for a simple comparison
     const oldest = photos[photos.length - 1];
     const newest = photos[0];
 
@@ -160,77 +159,77 @@ export default function ProgressPage() {
       {/* Metrics Log */}
       <BentoCard delay={0.1}>
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 text-primary border border-primary/30">
-            <TrendingUp className="h-5 w-5" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+            <TrendingUp className="h-4 w-4 text-emerald-400" />
           </div>
           <div>
-            <h2 className="text-xl font-display font-semibold text-white">Log Metrics</h2>
-            <p className="text-xs text-muted-foreground uppercase tracking-widest">Track body measurements</p>
+            <h2 className="text-sm font-semibold text-white tracking-tight">Log Metrics</h2>
+            <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Track body measurements</p>
           </div>
         </div>
 
         <form onSubmit={handleLogSubmit} className="space-y-4">
           <div className="space-y-3">
-            <input name="weightKg" type="number" step="0.1" placeholder="Weight (kg)" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+            <input name="weightKg" type="number" step="0.1" placeholder="Weight (kg)" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors" />
             <div className="grid grid-cols-2 gap-3">
-              <input name="waistCm" type="number" step="0.1" placeholder="Waist (cm)" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
-              <input name="chestCm" type="number" step="0.1" placeholder="Chest (cm)" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+              <input name="waistCm" type="number" step="0.1" placeholder="Waist (cm)" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors" />
+              <input name="chestCm" type="number" step="0.1" placeholder="Chest (cm)" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors" />
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <input name="armsCm" type="number" step="0.1" placeholder="Arms (cm)" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
-              <input name="hipsCm" type="number" step="0.1" placeholder="Hips (cm)" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+              <input name="armsCm" type="number" step="0.1" placeholder="Arms (cm)" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors" />
+              <input name="hipsCm" type="number" step="0.1" placeholder="Hips (cm)" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors" />
             </div>
           </div>
 
           <button 
             type="submit" 
             disabled={isLogLoading}
-            className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-primary-foreground px-5 py-4 font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+            className="w-full flex items-center justify-center gap-2 rounded-xl bg-white text-black px-5 py-3 text-sm font-medium hover:bg-slate-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
           >
-            {isLogLoading ? <><Loader2 className="h-5 w-5 animate-spin" /> Saving...</> : <><Save className="h-5 w-5" /> Save Progress</>}
+            {isLogLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</> : <><Save className="h-4 w-4" /> Save Progress</>}
           </button>
 
           {logSuccess && (
-            <div className="flex items-center gap-2 text-primary bg-primary/10 p-3 rounded-xl border border-primary/20 animate-in fade-in">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="text-sm font-medium">Metrics saved successfully!</span>
+            <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 animate-in fade-in">
+              <CheckCircle2 className="h-4 w-4" />
+              <span className="text-xs font-medium">Metrics saved successfully!</span>
             </div>
           )}
           {logError && (
-            <div className="flex items-start gap-2 text-destructive bg-destructive/10 p-3 rounded-xl border border-destructive/20 animate-in fade-in">
-              <AlertCircle className="h-5 w-5 shrink-0" />
-              <span className="text-sm">{logError}</span>
+            <div className="flex items-start gap-2 text-red-400 bg-red-500/10 p-3 rounded-lg border border-red-500/20 animate-in fade-in">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span className="text-xs">{logError}</span>
             </div>
           )}
         </form>
       </BentoCard>
 
       {/* Photo Upload */}
-      <BentoCard delay={0.2} gradient="secondary">
+      <BentoCard delay={0.2}>
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/20 text-secondary border border-secondary/30">
-            <Camera className="h-5 w-5" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/20">
+            <Camera className="h-4 w-4 text-blue-400" />
           </div>
           <div>
-            <h2 className="text-xl font-display font-semibold text-white">Upload Photos</h2>
-            <p className="text-xs text-muted-foreground uppercase tracking-widest">Visual progress tracking</p>
+            <h2 className="text-sm font-semibold text-white tracking-tight">Upload Photos</h2>
+            <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Visual progress tracking</p>
           </div>
         </div>
 
         <form onSubmit={handlePhotoSubmit} className="space-y-4">
           <div className="space-y-3">
-            <select name="angle" className="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 appearance-none">
-              <option value="front" className="bg-card">Front View</option>
-              <option value="side" className="bg-card">Side View</option>
-              <option value="back" className="bg-card">Back View</option>
+            <select name="angle" className="w-full rounded-xl border border-white/[0.06] bg-black/40 px-4 py-3 text-sm text-white focus:outline-none focus:border-white/[0.15] focus:bg-black/60 transition-colors appearance-none">
+              <option value="front" className="bg-slate-900">Front View</option>
+              <option value="side" className="bg-slate-900">Side View</option>
+              <option value="back" className="bg-slate-900">Back View</option>
             </select>
             
             <div className="relative group cursor-pointer">
               <input name="photo" type="file" accept="image/*" required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-              <div className="w-full rounded-2xl border-2 border-dashed border-white/20 bg-black/10 px-4 py-12 text-center transition-colors group-hover:border-secondary/50 group-hover:bg-secondary/5">
-                <Camera className="h-8 w-8 text-muted-foreground mx-auto mb-3 group-hover:text-secondary transition-colors" />
-                <p className="text-sm text-white font-medium mb-1">Click to browse or drag image here</p>
-                <p className="text-xs text-muted-foreground">Supports JPG, PNG, WEBP</p>
+              <div className="w-full rounded-xl border border-dashed border-white/[0.15] bg-white/[0.02] px-4 py-12 text-center transition-colors group-hover:border-white/[0.3] group-hover:bg-white/[0.04]">
+                <Camera className="h-6 w-6 text-slate-500 mx-auto mb-3 group-hover:text-slate-400 transition-colors" />
+                <p className="text-xs text-white font-medium mb-1">Click to browse or drag image here</p>
+                <p className="text-[10px] text-slate-500">Supports JPG, PNG, WEBP</p>
               </div>
             </div>
           </div>
@@ -238,21 +237,21 @@ export default function ProgressPage() {
           <button 
             type="submit" 
             disabled={isPhotoLoading}
-            className="w-full flex items-center justify-center gap-2 rounded-xl bg-secondary text-secondary-foreground px-5 py-4 font-medium hover:bg-secondary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+            className="w-full flex items-center justify-center gap-2 rounded-xl bg-white text-black px-5 py-3 text-sm font-medium hover:bg-slate-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
           >
-            {isPhotoLoading ? <><Loader2 className="h-5 w-5 animate-spin" /> Uploading...</> : <><Upload className="h-5 w-5" /> Upload Photo</>}
+            {isPhotoLoading ? <><Loader2 className="h-4 w-4 animate-spin" /> Uploading...</> : <><Upload className="h-4 w-4" /> Upload Photo</>}
           </button>
 
           {photoSuccess && (
-            <div className="flex items-center gap-2 text-secondary bg-secondary/10 p-3 rounded-xl border border-secondary/20 animate-in fade-in">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="text-sm font-medium">Photo uploaded successfully!</span>
+            <div className="flex items-center gap-2 text-emerald-400 bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 animate-in fade-in">
+              <CheckCircle2 className="h-4 w-4" />
+              <span className="text-xs font-medium">Photo uploaded successfully!</span>
             </div>
           )}
           {photoError && (
-            <div className="flex items-start gap-2 text-destructive bg-destructive/10 p-3 rounded-xl border border-destructive/20 animate-in fade-in">
-              <AlertCircle className="h-5 w-5 shrink-0" />
-              <span className="text-sm">{photoError}</span>
+            <div className="flex items-start gap-2 text-red-400 bg-red-500/10 p-3 rounded-lg border border-red-500/20 animate-in fade-in">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span className="text-xs">{photoError}</span>
             </div>
           )}
         </form>
@@ -261,51 +260,57 @@ export default function ProgressPage() {
       {/* Trend Charts */}
       <div className="lg:col-span-2">
         <BentoCard delay={0.3}>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/20 text-accent border border-accent/30">
-              <Activity className="h-5 w-5" />
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20">
+              <Activity className="h-4 w-4 text-amber-400" />
             </div>
             <div>
-              <h2 className="text-xl font-display font-semibold text-white">Body Trends</h2>
-              <p className="text-xs text-muted-foreground uppercase tracking-widest">Metrics over time</p>
+              <h2 className="text-sm font-semibold text-white tracking-tight">Body Trends</h2>
+              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Metrics over time</p>
             </div>
           </div>
 
           {isHistoryLoading ? (
             <div className="flex justify-center p-12">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              <Loader2 className="h-6 w-6 animate-spin text-slate-500" />
             </div>
           ) : historyData.length < 2 ? (
-            <div className="text-center p-12 rounded-2xl border border-dashed border-white/10 bg-black/20">
-              <p className="text-muted-foreground">Log more metrics to see your trends over time.</p>
+            <div className="text-center p-12 rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02]">
+              <p className="text-xs text-slate-500">Log more metrics to see your trends over time.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Weight Chart */}
-              <div className="h-64">
-                <h3 className="text-sm text-white mb-4 flex items-center gap-2"><Scale className="h-4 w-4 text-accent" /> Weight Trend (kg)</h3>
+              <div className="h-60">
+                <h3 className="text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2"><Scale className="h-3 w-3" /> Weight Trend (kg)</h3>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={historyData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                    <XAxis dataKey="date" stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} domain={['dataMin - 2', 'dataMax + 2']} />
-                    <Tooltip contentStyle={{ backgroundColor: '#000', border: '1px solid #333', borderRadius: '8px' }} />
-                    <Line type="monotone" dataKey="weightKg" stroke="#eab308" strokeWidth={3} dot={{ fill: '#eab308', strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0a" vertical={false} />
+                    <XAxis dataKey="date" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} dy={10} />
+                    <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} dx={-10} domain={['dataMin - 2', 'dataMax + 2']} />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '12px' }} 
+                      itemStyle={{ color: '#fff' }}
+                    />
+                    <Line type="monotone" dataKey="weightKg" stroke="#34d399" strokeWidth={2} dot={{ fill: '#34d399', strokeWidth: 2, r: 4 }} activeDot={{ r: 6, strokeWidth: 0 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
 
               {/* Measurements Chart */}
-              <div className="h-64">
-                <h3 className="text-sm text-white mb-4 flex items-center gap-2"><Ruler className="h-4 w-4 text-primary" /> Chest & Waist (cm)</h3>
+              <div className="h-60">
+                <h3 className="text-xs text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2"><Ruler className="h-3 w-3" /> Chest & Waist (cm)</h3>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={historyData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
-                    <XAxis dataKey="date" stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#ffffff50" fontSize={12} tickLine={false} axisLine={false} domain={['dataMin - 5', 'dataMax + 5']} />
-                    <Tooltip contentStyle={{ backgroundColor: '#000', border: '1px solid #333', borderRadius: '8px' }} />
-                    <Line type="monotone" dataKey="chestCm" stroke="#10b981" strokeWidth={3} dot={{ fill: '#10b981', strokeWidth: 2 }} activeDot={{ r: 6 }} name="Chest" />
-                    <Line type="monotone" dataKey="waistCm" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#3b82f6', strokeWidth: 2 }} activeDot={{ r: 6 }} name="Waist" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0a" vertical={false} />
+                    <XAxis dataKey="date" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} dy={10} />
+                    <YAxis stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} dx={-10} domain={['dataMin - 5', 'dataMax + 5']} />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '12px' }}
+                      itemStyle={{ color: '#fff' }}
+                    />
+                    <Line type="monotone" dataKey="chestCm" stroke="#38bdf8" strokeWidth={2} dot={{ fill: '#38bdf8', strokeWidth: 2, r: 4 }} activeDot={{ r: 6, strokeWidth: 0 }} name="Chest" />
+                    <Line type="monotone" dataKey="waistCm" stroke="#fbbf24" strokeWidth={2} dot={{ fill: '#fbbf24', strokeWidth: 2, r: 4 }} activeDot={{ r: 6, strokeWidth: 0 }} name="Waist" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -319,12 +324,12 @@ export default function ProgressPage() {
         <BentoCard delay={0.4}>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 text-primary border border-primary/30">
-                <Camera className="h-5 w-5" />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10 border border-purple-500/20">
+                <Camera className="h-4 w-4 text-purple-400" />
               </div>
               <div>
-                <h2 className="text-xl font-display font-semibold text-white">Photo Gallery</h2>
-                <p className="text-xs text-muted-foreground uppercase tracking-widest">Your progress over time</p>
+                <h2 className="text-sm font-semibold text-white tracking-tight">Photo Gallery</h2>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Your progress over time</p>
               </div>
             </div>
 
@@ -332,50 +337,50 @@ export default function ProgressPage() {
               <button 
                 onClick={runAiAnalysis}
                 disabled={isAnalyzing}
-                className="flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-medium hover:bg-slate-200 transition-colors disabled:opacity-50"
               >
-                {isAnalyzing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+                {isAnalyzing ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
                 Analyze Progress
               </button>
             )}
           </div>
 
           {aiAnalysis && (
-            <div className="mb-6 p-4 rounded-xl bg-white/5 border border-white/10 animate-in fade-in slide-in-from-top-4">
-              <div className="flex items-center gap-2 mb-2 text-primary">
+            <div className="mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] animate-in fade-in slide-in-from-top-4">
+              <div className="flex items-center gap-2 mb-2 text-purple-400">
                 <Sparkles className="h-4 w-4" />
-                <span className="text-sm font-semibold uppercase tracking-wider">AI Vision Analysis</span>
+                <span className="text-xs font-semibold uppercase tracking-wider">AI Vision Analysis</span>
               </div>
-              <p className="text-sm text-slate-300 leading-relaxed">{aiAnalysis}</p>
+              <p className="text-xs text-slate-300 leading-relaxed">{aiAnalysis}</p>
             </div>
           )}
 
           {isGalleryLoading ? (
             <div className="flex justify-center p-12">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              <Loader2 className="h-6 w-6 animate-spin text-slate-500" />
             </div>
           ) : photos.length === 0 ? (
-            <div className="text-center p-12 rounded-2xl border border-dashed border-white/10 bg-black/20">
-              <p className="text-muted-foreground">No photos uploaded yet.</p>
+            <div className="text-center p-12 rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02]">
+              <p className="text-xs text-slate-500">No photos uploaded yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {photos.map((photo, index) => (
-                <div key={photo._id} className="relative group rounded-xl overflow-hidden aspect-[3/4] bg-black/40 border border-white/10">
+                <div key={photo._id} className="relative group rounded-xl overflow-hidden aspect-[3/4] bg-slate-900 border border-white/[0.06]">
                   <Image 
                     src={photo.url} 
                     alt={`Progress photo - ${photo.angle}`} 
                     fill 
-                    className="object-cover transition-transform group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
+                  <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                     <div className="flex justify-between items-end">
                       <div>
-                        <p className="text-xs text-white capitalize font-medium">{photo.angle} View</p>
-                        <p className="text-[10px] text-white/70">{format(new Date(photo.takenAt), 'MMM d, yyyy')}</p>
+                        <p className="text-[10px] text-white capitalize font-medium">{photo.angle} View</p>
+                        <p className="text-[10px] text-white/50">{format(new Date(photo.takenAt), 'MMM d, yyyy')}</p>
                       </div>
-                      {index === 0 && <span className="px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded text-[10px] uppercase font-bold">New</span>}
-                      {index === photos.length - 1 && photos.length > 1 && <span className="px-2 py-0.5 bg-white/20 text-white border border-white/30 rounded text-[10px] uppercase font-bold">Before</span>}
+                      {index === 0 && <span className="px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded text-[9px] uppercase font-bold">New</span>}
+                      {index === photos.length - 1 && photos.length > 1 && <span className="px-1.5 py-0.5 bg-white/10 text-slate-300 border border-white/20 rounded text-[9px] uppercase font-bold">Before</span>}
                     </div>
                   </div>
                 </div>

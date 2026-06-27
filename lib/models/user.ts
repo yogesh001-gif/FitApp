@@ -21,6 +21,8 @@ export type UserRecord = {
   carbohydrateTarget?: number;
   fatTarget?: number;
   fiberTarget?: number;
+  cachedBriefing?: string;
+  lastBriefingGeneratedAt?: Date;
 };
 
 const UserSchema = new Schema(
@@ -43,7 +45,9 @@ const UserSchema = new Schema(
     proteinTarget: Number,
     carbohydrateTarget: Number,
     fatTarget: Number,
-    fiberTarget: Number
+    fiberTarget: Number,
+    cachedBriefing: String,
+    lastBriefingGeneratedAt: Date
   },
   { timestamps: true }
 );

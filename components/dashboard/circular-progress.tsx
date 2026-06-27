@@ -12,12 +12,12 @@ interface CircularProgressProps {
   sublabel?: string;
 }
 
-export function CircularProgress({ 
-  value, 
-  max = 100, 
-  size = 120, 
-  strokeWidth = 10,
-  colorClass = 'text-primary',
+export function CircularProgress({
+  value,
+  max = 100,
+  size = 120,
+  strokeWidth = 8,
+  colorClass = 'text-emerald-500 dark:text-emerald-400',
   label,
   sublabel
 }: CircularProgressProps) {
@@ -38,7 +38,7 @@ export function CircularProgress({
       >
         {/* Background Track */}
         <circle
-          className="text-white/10"
+          className="text-slate-200 dark:text-white/5 transition-colors"
           strokeWidth={strokeWidth}
           stroke="currentColor"
           fill="transparent"
@@ -60,14 +60,14 @@ export function CircularProgress({
           cy={size / 2}
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: offset }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
         />
       </svg>
-      
+
       {/* Inner Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2">
-        {label && <span className="text-2xl font-display font-bold text-white tracking-tight">{label}</span>}
-        {sublabel && <span className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">{sublabel}</span>}
+        {label && <span className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">{label}</span>}
+        {sublabel && <span className="text-[10px] uppercase tracking-wider text-slate-500 mt-1">{sublabel}</span>}
       </div>
     </div>
   );

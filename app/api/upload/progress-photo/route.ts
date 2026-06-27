@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
   const cloudinary = configureCloudinary();
   const arrayBuffer = await file.arrayBuffer();
   const base64 = Buffer.from(arrayBuffer).toString('base64');
-  const upload = await cloudinary.uploader.upload(`data:${file.type};base64,${base64}`, { folder: 'fitapp/progress' });
+  const upload = await cloudinary.uploader.upload(`data:${file.type};base64,${base64}`, { folder: 'fitmitra/progress' });
 
   const entry = await ProgressPhotoModel.create({
     userId: user._id,
