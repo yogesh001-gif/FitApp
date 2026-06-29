@@ -23,7 +23,7 @@ const lineVariants = {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-16 overflow-hidden bg-gradient-to-br from-amber-50/50 via-orange-50/30 to-white dark:bg-none dark:bg-black transition-colors duration-500">
+    <section className="relative min-h-screen flex items-center pt-8 sm:pt-12 pb-16 overflow-hidden bg-gradient-to-br from-amber-50/50 via-orange-50/30 to-white dark:bg-none dark:bg-black transition-colors duration-500">
       
       {/* Dark mode subtle ambient */}
       <div className="absolute inset-0 pointer-events-none hidden dark:block">

@@ -3,6 +3,7 @@ import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { ThemeProvider } from '../components/theme-provider';
+import { SplashScreen } from '../components/splash-screen';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
@@ -22,6 +23,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Providers>
+            <SplashScreen />
             {children}
           </Providers>
         </ThemeProvider>
